@@ -22,7 +22,9 @@ Entries before 2026-11-25 were written afterwards from the project notes.
 - Phase 5 started: installed bcftools 1.25, SnpEff 5.4c and Delly 0.7.6 in the conda env `variants`. Test of SNP calling on 500 kb of chr4 gave 8,483 variant sites. Full run for chr1-5 started at 23:40.
 
 ## 2026-11-25
-- Started DVC with DagsHub storage for the small results (reads and BAM files stay local).
+- Put the project on GitHub (`arabidopsis-gene-pav`) with the scripts, plan and this log.
+- Set up DVC with DagsHub storage. The small results (fastp, figures, mapping QC, MultiQC, PAV tables, FastQC) are tracked with DVC and pushed; reads and BAM files stay local.
+- SNP calling with bcftools: chr1 and chr2 finished, chr3-5 still running.
 
 ## Open points
 - Some absent genes may be genes that are too divergent from Col-0 for reads to map, not real deletions. To be checked with SNP density (Phase 5), Delly deletions (Phase 5) and the assemblies (Phase 6).

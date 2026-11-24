@@ -1,0 +1,6 @@
+outs:
+- md5: 66f8da6121efe4c00ff29a27eb6f00bb.dir
+  size: 5368252
+  nfiles: 34
+  hash: md5
+  path: fastp

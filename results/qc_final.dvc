@@ -1,0 +1,6 @@
+outs:
+- md5: f24f673d0b60bee18f64c3cdaf1ca4cb.dir
+  size: 16846470
+  nfiles: 32
+  hash: md5
+  path: qc_final

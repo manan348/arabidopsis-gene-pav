@@ -1,0 +1,6 @@
+outs:
+- md5: d84bdb432cec2852428835604d1b0a69.dir
+  size: 4243622
+  nfiles: 8
+  hash: md5
+  path: qc_raw

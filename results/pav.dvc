@@ -1,0 +1,6 @@
+outs:
+- md5: 7ed896984d354e8c0b85059d159b7678.dir
+  size: 23089943
+  nfiles: 123
+  hash: md5
+  path: pav
