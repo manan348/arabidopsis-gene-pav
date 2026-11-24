@@ -1,0 +1,9 @@
+sample	accession_name	id_1001g	country	run	n_pairs	note
+Col-0	Col-0	6909	US	SRR1945757	9000000	reference control
+An-1	An-1	6898	Belgium	SRR1945750	8738816	assembly available (Jiao 2020)
+Cvi-0	Cvi-0	6911	Cape Verde	SRR1945758	9000000	assembly available (Jiao 2020)
+Ler-1	Ler-1	6932	Germany	SRR1945772	9000000	assembly available (Jiao 2020, Ler)
+Kyoto	Kyoto	7207	Japan	SRR1945866	9000000	assembly available (Jiao 2020, Kyo)
+Ale-Stenar-44-4	Ale-Stenar-44-4	992	Sweden	SRR1945477	11800000	76 bp reads
+Se-0	Se-0	6961	Spain	SRR1945785	9000000
+Kondara	Kondara	6929	Tajikistan	SRR1945770	9000000

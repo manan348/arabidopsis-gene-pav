@@ -1,0 +1,24 @@
+# Big or downloadable data stays out of git. Small results are tracked by DVC (see *.dvc files).
+data/reads/
+data/reads_15x/
+data/reads_trimmed/
+data/reads_trimmed_full/
+data/reads_final/
+data/bam/
+data/assemblies/
+data/reference/TAIR10.1_Col-0/
+data/reference/index/
+tools/
+
+# temporary files of the pipelines
+*.tmp
+*.tmp.bam
+sorttmp/
+__pycache__/
+*.pyc
+nohup.out
+
+# secrets: never commit (DVC also keeps .dvc/config.local out of git)
+.dvc/config.local
+*.token
+.env
