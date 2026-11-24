@@ -24,7 +24,9 @@ Entries before 2026-11-25 were written afterwards from the project notes.
 ## 2026-11-25
 - Put the project on GitHub (`arabidopsis-gene-pav`) with the scripts, plan and this log.
 - Set up DVC with DagsHub storage. The small results (fastp, figures, mapping QC, MultiQC, PAV tables, FastQC) are tracked with DVC and pushed; reads and BAM files stay local.
-- SNP calling with bcftools: chr1 and chr2 finished, chr3-5 still running.
+- SNP calling with bcftools finished for chr1-5 (01:32): 2,046,654 raw sites (1,794,047 SNPs, 252,607 indels), Ts/Tv 1.21.
+- Low-quality sites have almost the same Ts/Tv (1.14) as the rest (1.22), so they are not mostly errors. Chose a mild filter (QUAL >= 20, total depth 20-130): 1,850,079 sites kept (90%).
+- Delly 0.7.6 crashed (segmentation fault); installed Delly 2.8.2 in a separate env for the deletion calling.
 
 ## Open points
 - Some absent genes may be genes that are too divergent from Col-0 for reads to map, not real deletions. To be checked with SNP density (Phase 5), Delly deletions (Phase 5) and the assemblies (Phase 6).
