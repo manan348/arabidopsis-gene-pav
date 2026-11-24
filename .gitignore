@@ -18,6 +18,14 @@ __pycache__/
 *.pyc
 nohup.out
 
+# personal and working files that do not belong in the public repo
+New folder (2)/
+Project/
+SESSION_CONTEXT.md
+*.pdf
+results/pav_sens/
+results/pav_queue.log
+
 # secrets: never commit (DVC also keeps .dvc/config.local out of git)
 .dvc/config.local
 *.token
