@@ -89,7 +89,7 @@ def fig4(df, chrom_len, out, bin_bp=100_000):
     ax.set_xlim(0, snp_n.max() / 1e3 * 1.25)
     ax.set_xlabel("sites differing from Col-0 (thousands)")
     ax.set_title("(a) Differences from the reference")
-    ax.legend(frameon=False, loc="lower right")
+    ax.legend(frameon=False, loc="upper right")  # top row (Col-0) is nearly empty, so nothing is covered
 
     # (c) PCA on sites genotyped in all 8 accessions
     complete = ~np.isnan(df[ORDER].to_numpy()).any(axis=1) & is_snp
@@ -148,12 +148,16 @@ def fig4(df, chrom_len, out, bin_bp=100_000):
         first = first or ax
         im = ax.imshow(mats[c], cmap=SEQ, vmin=0, vmax=vmax, aspect="auto", interpolation="nearest",
                        extent=(0, chrom_len[c] / 1e6, len(ORDER), 0))
-        ax.set_title(CHROMS[c] if k else f"(d) SNPs per {bin_bp // 1000} kb along the genome   {CHROMS[c]}", fontsize=9)
+        ax.set_title(CHROMS[c], fontsize=9)
+        if k == 0:  # panel heading on its own line above the chromosome names, so it cannot run into "Chr2"
+            ax.text(0, 1.16, f"(d) SNPs per {bin_bp // 1000} kb along the genome", transform=ax.transAxes,
+                    fontsize=10, fontweight="bold", ha="left", va="bottom")
         ax.set_xlabel("Mb")
         if k == 0:
             ax.set_yticks(np.arange(len(ORDER)) + 0.5)
             ax.set_yticklabels(ORDER)
         else:
+            ax.set_xticks(np.arange(5, chrom_len[c] / 1e6, 5))  # no "0" tick, so it cannot touch the previous chromosome's last label
             plt.setp(ax.get_yticklabels(), visible=False)
             ax.tick_params(axis="y", length=0)
     cax = fig.add_subplot(sub[0, -1])
@@ -232,7 +236,7 @@ def fig5(df, pav_path, bed_path, chrom_len, out, flank_bp):
     ax2.set_xlim(0, max(med_p.max(), med_a.max()) * 1.3)
     ax2.set_xlabel("median SNPs per kb around the gene")
     ax2.set_title("(b) Per accession")
-    ax2.legend(frameon=False, loc="lower right")
+    ax2.legend(frameon=False, loc="upper left")  # left of the An-1 dots is empty
     ax2.grid(axis="x", color=GRID, lw=0.6)
     ax2.set_axisbelow(True)
     fig.suptitle("Are absent genes in more diverged regions? (descriptive; a large gap would mean some absent calls may be mapping failures)",

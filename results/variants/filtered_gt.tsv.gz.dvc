@@ -1,0 +1,5 @@
+outs:
+- md5: 0be3af092f2fd8e496c965bc6d25faae
+  size: 19007208
+  hash: md5
+  path: filtered_gt.tsv.gz

@@ -30,3 +30,23 @@ results/pav_queue.log
 .dvc/config.local
 *.token
 .env
+
+# regenerable or large variant files (the filtered VCF and small tables are tracked by DVC)
+results/variants/raw/
+results/variants/test/
+results/variants/all_raw.vcf.gz
+results/variants/all_raw.vcf.gz.tbi
+results/variants/annotated.vcf.gz
+results/variants/annotated.vcf.gz.tbi
+results/variants/filtered.vcf.gz.tbi
+results/variants/snpeff_summary.genes.txt
+
+# Phase 6 files that are regenerable or large
+results/assembly/liftoff/*_tmp/
+data/reference/genes_protein_coding.gff
+data/reference/genes_protein_coding.gff_db
+
+# private working notes: kept locally, not published
+PROJECT_PLAN.md
+data/reference/genes_only.gff
+data/reference/genes_only.gff_db
