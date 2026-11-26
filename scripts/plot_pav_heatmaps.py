@@ -3,10 +3,10 @@
     python scripts/plot_pav_heatmaps.py [--pavdir results/pav] [--outdir results/figures]
 
 Writes (PNG, 200 dpi):
-  pav_accession_similarity.png  7 x 7: shared absent genes between accessions (Col-0 left out, it has none)
-  pav_genome_heatmap.png        absent genes per 1 Mb bin along chr1-5, one row per accession
-  pav_depth_heatmap.png         depth / sample median for the variable genes (red = low, white = 1, blue = high)
-  pav_heatmap_clustered.png     variable genes clustered with dendrograms (only if scipy is installed)
+  11_pav_shared_absences__jaccard_similarity_matrix.png  7 x 7: shared absent genes between accessions (Col-0 left out, it has none)
+  12_pav_along_chromosomes__density_heatmap.png        absent genes per 1 Mb bin along chr1-5, one row per accession
+  10_pav_relative_depth__diverging_heatmap.png         depth / sample median for the variable genes (red = low, white = 1, blue = high)
+  09_pav_clustered__clustered_heatmap_dendrogram.png     variable genes clustered with dendrograms (only if scipy is installed)
 """
 import argparse
 import os
@@ -174,10 +174,10 @@ def main():
     long = pd.read_csv(os.path.join(a.pavdir, "pav_long.tsv.gz"), sep="\t")
     os.makedirs(a.outdir, exist_ok=True)
     num, depth = variable_genes(long)
-    fig_similarity(long, os.path.join(a.outdir, "pav_accession_similarity.png"))
-    fig_genome(long, a.bed, os.path.join(a.outdir, "pav_genome_heatmap.png"))
-    fig_depth(depth, os.path.join(a.outdir, "pav_depth_heatmap.png"))
-    fig_clustered(num, os.path.join(a.outdir, "pav_heatmap_clustered.png"))
+    fig_similarity(long, os.path.join(a.outdir, "11_pav_shared_absences__jaccard_similarity_matrix.png"))
+    fig_genome(long, a.bed, os.path.join(a.outdir, "12_pav_along_chromosomes__density_heatmap.png"))
+    fig_depth(depth, os.path.join(a.outdir, "10_pav_relative_depth__diverging_heatmap.png"))
+    fig_clustered(num, os.path.join(a.outdir, "09_pav_clustered__clustered_heatmap_dendrogram.png"))
     print("done, files in", a.outdir)
 
 

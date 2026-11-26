@@ -50,3 +50,22 @@ data/reference/genes_protein_coding.gff_db
 PROJECT_PLAN.md
 data/reference/genes_only.gff
 data/reference/genes_only.gff_db
+data/busco_downloads/
+data/reference/ne_110m_land/
+data/syri/
+results/syri/*.bam
+results/syri/*.syri.vcf
+results/syri/*.syri.out
+# tool side files in the project root
+busco_*.log
+/busco_downloads/
+plotsr.log
+# large regenerable assembly outputs (kept local; key tables tracked below)
+results/assembly/busco/
+results/assembly/liftoff/
+results/assembly/quast/*
+!results/assembly/quast/report.tsv
+results/assembly_busco_*.log
+.vscode/
+# full figure set (39 PNGs, 17 MB) kept local; 8 key figures are in docs/figures/
+results/figures/

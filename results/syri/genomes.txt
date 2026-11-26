@@ -1,0 +1,6 @@
+#file	name	tags
+data/syri/Col-0.fa	Col-0	lw:1.5
+data/syri/An-1.fa	An-1	lw:1.5
+data/syri/Kyoto.fa	Kyoto	lw:1.5
+data/syri/Ler-1.fa	Ler-1	lw:1.5
+data/syri/Cvi-0.fa	Cvi-0	lw:1.5

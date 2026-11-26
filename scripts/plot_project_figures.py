@@ -9,9 +9,9 @@ Inputs (read only, never modified):
     results/multiqc/multiqc_mapping_data/multiqc_general_stats.txt   MultiQC of results/mapping
     results/mapping/<S>/<S>.flagstat.txt                        read totals and duplicates
 Outputs (PNG, 300 dpi) in results/figures/:
-    fig1_mapping_overview.png   how good is each accession's mapping (6 panels)
-    fig2_pav_method_check.png   Col-0 control vs the other accessions, and how stable the absent calls are
-    fig3_pav_results.png        what the PAV calls say (4 panels)
+    03_mapping_quality__bar_chart_cleveland_dot_plot.png   how good is each accession's mapping (6 panels)
+    05_pav_cutoff_check__hexbin_sensitivity_plot.png   Col-0 control vs the other accessions, and how stable the absent calls are
+    07_pav_results__stacked_bar_ecdf_scatter.png        what the PAV calls say (4 panels)
 
 The threshold options below are only used to DRAW the reference lines. They must equal the values
 used in scripts/build_pav.py (defaults are the same). Colours follow the validated dataviz palette:
@@ -296,9 +296,9 @@ def main():
     qc = load_qc(a.mqc, a.mapdir)
     medians = long.groupby("accession")["median_depth"].first()
     os.makedirs(a.outdir, exist_ok=True)
-    fig1(qc, medians, os.path.join(a.outdir, "fig1_mapping_overview.png"))
-    fig2(long, a, os.path.join(a.outdir, "fig2_pav_method_check.png"))
-    fig3(long, qc, a, os.path.join(a.outdir, "fig3_pav_results.png"))
+    fig1(qc, medians, os.path.join(a.outdir, "03_mapping_quality__bar_chart_cleveland_dot_plot.png"))
+    fig2(long, a, os.path.join(a.outdir, "05_pav_cutoff_check__hexbin_sensitivity_plot.png"))
+    fig3(long, qc, a, os.path.join(a.outdir, "07_pav_results__stacked_bar_ecdf_scatter.png"))
     print("wrote 3 figures to", a.outdir)
 
 

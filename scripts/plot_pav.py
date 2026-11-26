@@ -3,9 +3,9 @@
     python scripts/plot_pav.py [--pavdir results/pav] [--outdir results/figures]
 
 Writes three PNG files:
-  pav_calls_per_accession.png   absent / ambiguous / uncertain gene counts per accession
-  depth_hist_per_accession.png  per-gene depth (MAPQ >= 10) / sample median, with the 0.2 cut-off
-  pav_heatmap_variable.png      genes with >= 1 absence (rows) x accessions (columns)
+  06_pav_calls_per_accession__grouped_bar_chart.png   absent / ambiguous / uncertain gene counts per accession
+  04_pav_gene_depth__histograms.png  per-gene depth (MAPQ >= 10) / sample median, with the 0.2 cut-off
+  08_pav_variable_genes__binary_heatmap.png      genes with >= 1 absence (rows) x accessions (columns)
 No clustering is done here (that needs scipy; planned for Phase 7).
 """
 import argparse
@@ -97,9 +97,9 @@ def main():
     a = ap.parse_args()
     long = pd.read_csv(os.path.join(a.pavdir, "pav_long.tsv.gz"), sep="\t")
     os.makedirs(a.outdir, exist_ok=True)
-    fig_calls(long, os.path.join(a.outdir, "pav_calls_per_accession.png"))
-    fig_depth(long, os.path.join(a.outdir, "depth_hist_per_accession.png"))
-    fig_heatmap(long, os.path.join(a.outdir, "pav_heatmap_variable.png"))
+    fig_calls(long, os.path.join(a.outdir, "06_pav_calls_per_accession__grouped_bar_chart.png"))
+    fig_depth(long, os.path.join(a.outdir, "04_pav_gene_depth__histograms.png"))
+    fig_heatmap(long, os.path.join(a.outdir, "08_pav_variable_genes__binary_heatmap.png"))
     print("wrote 3 figures to", a.outdir)
 
 

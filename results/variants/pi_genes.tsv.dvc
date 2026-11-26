@@ -1,0 +1,5 @@
+outs:
+- md5: 28569e81ed952ad4b295377a8c80785a
+  size: 1102232
+  hash: md5
+  path: pi_genes.tsv

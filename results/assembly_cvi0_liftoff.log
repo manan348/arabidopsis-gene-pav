@@ -1,0 +1,133 @@
+Thu Nov 26 00:26:29 PKT 2026 start liftoff Cvi-0
+2026-11-26 00:30:34,079 - INFO - Populating features
+Populating features table and first-order relations: 0 featuresPopulating features table and first-order relations: 1000 featuresPopulating features table and first-order relations: 2000 featuresPopulating features table and first-order relations: 3000 featuresPopulating features table and first-order relations: 4000 featuresPopulating features table and first-order relations: 5000 featuresPopulating features table and first-order relations: 6000 featuresPopulating features table and first-order relations: 7000 featuresPopulating features table and first-order relations: 8000 featuresPopulating features table and first-order relations: 9000 featuresPopulating features table and first-order relations: 10000 featuresPopulating features table and first-order relations: 11000 featuresPopulating features table and first-order relations: 12000 featuresPopulating features table and first-order relations: 13000 featuresPopulating features table and first-order relations: 14000 featuresPopulating features table and first-order relations: 15000 featuresPopulating features table and first-order relations: 16000 featuresPopulating features table and first-order relations: 17000 featuresPopulating features table and first-order relations: 18000 featuresPopulating features table and first-order relations: 19000 featuresPopulating features table and first-order relations: 20000 featuresPopulating features table and first-order relations: 21000 featuresPopulating features table and first-order relations: 22000 featuresPopulating features table and first-order relations: 23000 featuresPopulating features table and first-order relations: 24000 featuresPopulating features table and first-order relations: 25000 featuresPopulating features table and first-order relations: 26000 featuresPopulating features table and first-order relations: 27000 features2026-11-26 00:30:42,466 - INFO - Populating features table and first-order relations: 27443 features
+2026-11-26 00:30:42,478 - INFO - Updating relations
+2026-11-26 00:30:42,956 - INFO - Creating relations(parent) index
+2026-11-26 00:30:42,959 - INFO - Creating relations(child) index
+2026-11-26 00:30:42,960 - INFO - Creating features(featuretype) index
+2026-11-26 00:30:43,752 - INFO - Creating features (seqid, start, end) index
+2026-11-26 00:30:45,625 - INFO - Creating features (seqid, start, end, strand) index
+2026-11-26 00:30:45,795 - INFO - Running ANALYZE features
+extracting features
+[M::mm_idx_gen::18.292*1.51] collected minimizers
+[M::mm_idx_gen::20.176*1.64] sorted minimizers
+[M::main::109.381*0.39] loaded/built the index for 102 target sequence(s)
+[M::mm_idx_stat] kmer size: 15; skip: 10; is_hpc: 0; #seq: 102
+[M::mm_idx_stat::109.716*0.40] distinct minimizers: 15708364 (79.68% are singletons); average occurrences: 1.430; average spacing: 5.332; total length: 119749512
+@SQ	SN:LR699760.1	LN:30222096
+@SQ	SN:LR699761.1	LN:20044946
+@SQ	SN:LR699762.1	LN:23195252
+@SQ	SN:LR699763.1	LN:18371560
+@SQ	SN:LR699764.1	LN:26470424
+@SQ	SN:CABPTK010000001.1	LN:100079
+@SQ	SN:CABPTK010000002.1	LN:41561
+@SQ	SN:CABPTK010000003.1	LN:33404
+@SQ	SN:CABPTK010000004.1	LN:7570
+@SQ	SN:CABPTK010000005.1	LN:35732
+@SQ	SN:CABPTK010000006.1	LN:28132
+@SQ	SN:CABPTK010000007.1	LN:25387
+@SQ	SN:CABPTK010000008.1	LN:17817
+@SQ	SN:CABPTK010000009.1	LN:21396
+@SQ	SN:CABPTK010000010.1	LN:20313
+@SQ	SN:CABPTK010000011.1	LN:19822
+@SQ	SN:CABPTK010000012.1	LN:2920
+@SQ	SN:CABPTK010000013.1	LN:18472
+@SQ	SN:CABPTK010000014.1	LN:18307
+@SQ	SN:CABPTK010000015.1	LN:18586
+@SQ	SN:CABPTK010000016.1	LN:17428
+@SQ	SN:CABPTK010000017.1	LN:17150
+@SQ	SN:CABPTK010000018.1	LN:16824
+@SQ	SN:CABPTK010000019.1	LN:16753
+@SQ	SN:CABPTK010000020.1	LN:16706
+@SQ	SN:CABPTK010000021.1	LN:15873
+@SQ	SN:CABPTK010000022.1	LN:15516
+@SQ	SN:CABPTK010000023.1	LN:15590
+@SQ	SN:CABPTK010000024.1	LN:14570
+@SQ	SN:CABPTK010000025.1	LN:14125
+@SQ	SN:CABPTK010000026.1	LN:20203
+@SQ	SN:CABPTK010000027.1	LN:13397
+@SQ	SN:CABPTK010000028.1	LN:13100
+@SQ	SN:CABPTK010000029.1	LN:12657
+@SQ	SN:CABPTK010000030.1	LN:10456
+@SQ	SN:CABPTK010000031.1	LN:12145
+@SQ	SN:CABPTK010000032.1	LN:12585
+@SQ	SN:CABPTK010000033.1	LN:10889
+@SQ	SN:CABPTK010000034.1	LN:10017
+@SQ	SN:CABPTK010000035.1	LN:9667
+@SQ	SN:CABPTK010000036.1	LN:9169
+@SQ	SN:CABPTK010000037.1	LN:9089
+@SQ	SN:CABPTK010000038.1	LN:8561
+@SQ	SN:CABPTK010000039.1	LN:8124
+@SQ	SN:CABPTK010000040.1	LN:8150
+@SQ	SN:CABPTK010000041.1	LN:8024
+@SQ	SN:CABPTK010000042.1	LN:7703
+@SQ	SN:CABPTK010000043.1	LN:7700
+@SQ	SN:CABPTK010000044.1	LN:7246
+@SQ	SN:CABPTK010000045.1	LN:7065
+@SQ	SN:CABPTK010000046.1	LN:6881
+@SQ	SN:CABPTK010000047.1	LN:6845
+@SQ	SN:CABPTK010000048.1	LN:6484
+@SQ	SN:CABPTK010000049.1	LN:6398
+@SQ	SN:CABPTK010000050.1	LN:6281
+@SQ	SN:CABPTK010000051.1	LN:6269
+@SQ	SN:CABPTK010000052.1	LN:6232
+@SQ	SN:CABPTK010000053.1	LN:6006
+@SQ	SN:CABPTK010000054.1	LN:6061
+@SQ	SN:CABPTK010000055.1	LN:5876
+@SQ	SN:CABPTK010000056.1	LN:5975
+@SQ	SN:CABPTK010000057.1	LN:5741
+@SQ	SN:CABPTK010000058.1	LN:5725
+@SQ	SN:CABPTK010000059.1	LN:5708
+@SQ	SN:CABPTK010000060.1	LN:5451
+@SQ	SN:CABPTK010000061.1	LN:5345
+@SQ	SN:CABPTK010000062.1	LN:4963
+@SQ	SN:CABPTK010000063.1	LN:4653
+@SQ	SN:CABPTK010000064.1	LN:4631
+@SQ	SN:CABPTK010000065.1	LN:4633
+@SQ	SN:CABPTK010000066.1	LN:4329
+@SQ	SN:CABPTK010000067.1	LN:4148
+@SQ	SN:CABPTK010000068.1	LN:4127
+@SQ	SN:CABPTK010000069.1	LN:4115
+@SQ	SN:CABPTK010000070.1	LN:3920
+@SQ	SN:CABPTK010000071.1	LN:4052
+@SQ	SN:CABPTK010000072.1	LN:3750
+@SQ	SN:CABPTK010000073.1	LN:3606
+@SQ	SN:CABPTK010000074.1	LN:3630
+@SQ	SN:CABPTK010000075.1	LN:3229
+@SQ	SN:CABPTK010000076.1	LN:3084
+@SQ	SN:CABPTK010000077.1	LN:2804
+@SQ	SN:CABPTK010000078.1	LN:2564
+@SQ	SN:CABPTK010000079.1	LN:2491
+@SQ	SN:CABPTK010000080.1	LN:2454
+@SQ	SN:CABPTK010000081.1	LN:2327
+@SQ	SN:CABPTK010000082.1	LN:2141
+@SQ	SN:CABPTK010000083.1	LN:2087
+@SQ	SN:CABPTK010000084.1	LN:2040
+@SQ	SN:CABPTK010000085.1	LN:1928
+@SQ	SN:CABPTK010000086.1	LN:1818
+@SQ	SN:CABPTK010000087.1	LN:1490
+@SQ	SN:CABPTK010000088.1	LN:1371
+@SQ	SN:CABPTK010000089.1	LN:1277
+@SQ	SN:CABPTK010000090.1	LN:670
+@SQ	SN:CABPTK010000091.1	LN:488
+@SQ	SN:CABPTK010000092.1	LN:32072
+@SQ	SN:CABPTK010000093.1	LN:9969
+@SQ	SN:CABPTK010000094.1	LN:13958
+@SQ	SN:CABPTK010000095.1	LN:28375
+@SQ	SN:CABPTK010000096.1	LN:22907
+@SQ	SN:CABPTK010000097.1	LN:375875
+@PG	ID:minimap2	PN:minimap2	VN:2.24-r1122	CL:minimap2 -d data/assemblies/Cvi-0/Cvi-0.fna.mmi -a --end-bonus 5 --eqx -N 50 -p 0.5 -t 3 data/assemblies/Cvi-0/Cvi-0.fna
+[M::main] Version: 2.24-r1122
+[M::main] CMD: minimap2 -d data/assemblies/Cvi-0/Cvi-0.fna.mmi -a --end-bonus 5 --eqx -N 50 -p 0.5 -t 3 data/assemblies/Cvi-0/Cvi-0.fna
+[M::main] Real time: 110.197 sec; CPU: 43.812 sec; Peak RSS: 0.916 GB
+[M::main::32.988*0.28] loaded/built the index for 102 target sequence(s)
+[M::mm_mapopt_update::33.520*0.29] mid_occ = 60
+[M::mm_idx_stat] kmer size: 15; skip: 10; is_hpc: 0; #seq: 102
+[M::mm_idx_stat::33.832*0.30] distinct minimizers: 15708364 (79.68% are singletons); average occurrences: 1.430; average spacing: 5.332; total length: 119749512
+[M::worker_pipeline::79.726*1.00] mapped 27444 sequences
+[M::main] Version: 2.24-r1122
+[M::main] CMD: minimap2 -o results/assembly/liftoff/Cvi-0_tmp/reference_all_to_target_all.sam -a --end-bonus 5 --eqx -N 50 -p 0.5 -t 3 data/assemblies/Cvi-0/Cvi-0.fna.mmi results/assembly/liftoff/Cvi-0_tmp/reference_all_genes.fa
+[M::main] Real time: 79.801 sec; CPU: 80.053 sec; Peak RSS: 1.075 GB
+aligning features
+lifting features
+Thu Nov 26 00:37:50 PKT 2026 DONE Cvi-0: 27002 genes placed, 442 unmapped

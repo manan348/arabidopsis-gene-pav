@@ -5,7 +5,7 @@ Run:
     python scripts/plot_pangenome.py
 
 Input (read only): results/pav/pav_long.tsv.gz  (gene, accession, call)
-Outputs: results/figures/fig8_shared_absences_upset.png, results/figures/fig9_gene_accumulation.png (300 dpi)
+Outputs: results/figures/28_pangenome_shared_absences__upset_plot.png, results/figures/29_pangenome_core_genes__accumulation_rarefaction_curve.png (300 dpi)
 
 A gene counts as ABSENT in an accession only when its call is `absent`. Ambiguous and uncertain calls are
 not evidence of absence. The accumulation curve shows two lines: "not absent in any" (lenient) and
@@ -170,8 +170,8 @@ def accumulation(call, absent7, out, n_perm, seed):
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--pav", default="results/pav/pav_long.tsv.gz")
-    ap.add_argument("--out8", default="results/figures/fig8_shared_absences_upset.png")
-    ap.add_argument("--out9", default="results/figures/fig9_gene_accumulation.png")
+    ap.add_argument("--out8", default="results/figures/28_pangenome_shared_absences__upset_plot.png")
+    ap.add_argument("--out9", default="results/figures/29_pangenome_core_genes__accumulation_rarefaction_curve.png")
     ap.add_argument("--top", type=int, default=20, help="number of absence patterns shown in the UpSet plot")
     ap.add_argument("--perms", type=int, default=1000)
     ap.add_argument("--seed", type=int, default=1)

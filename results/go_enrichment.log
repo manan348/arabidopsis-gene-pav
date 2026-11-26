@@ -1,0 +1,31 @@
+background: 27444 genes, 26706 with a GO annotation (97%)
+absent    911 genes,   787 with GO (86%)
+broken   3658 genes,  3488 with GO (95%)
+overlap absent/broken: 191 genes
+CC : no significant terms
+Warning message:
+In compareCluster(geneClusters = sets, fun = "enrichGO", OrgDb = org.At.tair.db,  :
+  No enrichment found in any of gene cluster, please check your input...
+
+significant terms (FDR < 0.05):
+        
+         BP MF
+  absent  8  9
+  broken  0  2
+
+top 5 per set and ontology:
+  absent BP  protein localization to cell surface                     14/683  FDR 1.3e-07
+  absent BP  regulation of protein localization to cell surface       14/683  FDR 1.3e-07
+  absent BP  regulation of double fertilization forming a zygote and  14/683  FDR 4.3e-07
+  absent BP  regulation of protein localization                       14/683  FDR 1.3e-05
+  absent BP  double fertilization forming a zygote and endosperm      14/683  FDR 2.4e-04
+  absent MF  ADP binding                                              52/786  FDR 2.9e-36
+  absent MF  RNA-DNA hybrid ribonuclease activity                     17/786  FDR 1.3e-13
+  absent MF  RNA endonuclease activity producing 5'-phosphomonoester  17/786  FDR 7.5e-10
+  absent MF  NAD+ nucleosidase activity, cyclic ADP-ribose generatin  10/786  FDR 6.8e-07
+  absent MF  RNA endonuclease activity                                17/786  FDR 6.8e-07
+  broken MF  ADP binding                                             52/3458  FDR 4.7e-07
+  broken MF  RNA-DNA hybrid ribonuclease activity                    17/3458  FDR 3.1e-03
+
+fig19 terms: ADP binding | RNA-DNA hybrid ribonuclease activity | protein localization to cell surface | NAD+ nucleosidase activity, cyclic ADP-ribose generating | sesquiterpene biosynthetic process 
+wrote results/go/go_enrichment.tsv and results/figures/fig18_go_enrichment.png (+ fig19 if terms)

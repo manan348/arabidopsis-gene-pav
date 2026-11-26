@@ -9,8 +9,8 @@ Step 2 (env `map`):
 Inputs (read only): results/variants/filtered_gt.tsv.gz, results/pav/pav_long.tsv.gz,
                     data/reference/genes.bed, the reference .fai
 Outputs (PNG, 300 dpi) in results/figures/:
-    fig4_variants_overview.png            variants per accession, SNP density, PCA, pairwise differences
-    fig5_absent_genes_snp_density.png     SNP density around absent vs present genes
+    13_variants__bar_chart_pca_distance_heatmap.png            variants per accession, SNP density, PCA, pairwise differences
+    14_variants_snp_density__ecdf_dumbbell_plot.png     SNP density around absent vs present genes
 
 Genotypes come from haploid calling (--ploidy 1): 0 = reference allele, 1 or more = alternative allele,
 missing = no call. Only SNPs are used for density, PCA and distances. Everything is descriptive.
@@ -258,8 +258,8 @@ def main():
     chrom_len = load_chrom_lengths(a.fai)
     df = load_genotypes(a.gt)
     os.makedirs(a.outdir, exist_ok=True)
-    fig4(df, chrom_len, os.path.join(a.outdir, "fig4_variants_overview.png"))
-    fig5(df, a.pav, a.bed, chrom_len, os.path.join(a.outdir, "fig5_absent_genes_snp_density.png"), a.flank_bp)
+    fig4(df, chrom_len, os.path.join(a.outdir, "13_variants__bar_chart_pca_distance_heatmap.png"))
+    fig5(df, a.pav, a.bed, chrom_len, os.path.join(a.outdir, "14_variants_snp_density__ecdf_dumbbell_plot.png"), a.flank_bp)
     print("wrote 2 figures to", a.outdir)
 
 

@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Figure 6: Delly deletions versus the PAV absent calls (Phase 5), run in env `map`.
+"""Figure 16: Delly deletions versus the PAV absent calls (Phase 5), run in env `map`.
 
 Run after scripts/sv_vs_pav.py:
     python scripts/plot_sv.py
 
 Inputs (read only): results/sv/sv_vs_pav_summary.tsv, results/sv/pass_deletions.tsv
-Output: results/figures/fig6_deletions_vs_absent_genes.png (300 dpi)
+Output: results/figures/16_deletions_vs_absent__dumbbell_scatter_ecdf.png (300 dpi)
     (a) % of absent and of present genes that lie >= 50% inside a PASS deletion (log scale), fold difference
     (b) number of PASS deletions per accession vs the % of absent genes confirmed (Delly sensitivity)
     (c) deletion lengths (cumulative), with the 100 kb cut used in sv_vs_pav.py
@@ -39,7 +39,7 @@ def main():
     ap.add_argument("--summary", default="results/sv/sv_vs_pav_summary.tsv")
     ap.add_argument("--dels", default="results/sv/pass_deletions.tsv")
     ap.add_argument("--max-len", type=int, default=100_000, help="must match the value used in sv_vs_pav.py")
-    ap.add_argument("--out", default="results/figures/fig6_deletions_vs_absent_genes.png")
+    ap.add_argument("--out", default="results/figures/16_deletions_vs_absent__dumbbell_scatter_ecdf.png")
     a = ap.parse_args()
 
     s = pd.read_csv(a.summary, sep="\t").set_index(["accession", "call"])

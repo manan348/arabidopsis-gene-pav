@@ -1,0 +1,6 @@
+outs:
+- md5: 97780cf9ee2d0f02cc58c41a15f92bab.dir
+  size: 9141
+  nfiles: 1
+  hash: md5
+  path: go

@@ -2,3 +2,6 @@
 /filtered_gt.tsv.gz
 /high_impact.tsv.gz
 /lof_genes.tsv.gz
+/pi_genes.tsv
+/pi_windows.tsv
+/pnps_genes.tsv

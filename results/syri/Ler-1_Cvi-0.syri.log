@@ -1,0 +1,31 @@
+2026-11-26 17:42:42,662 - Reading Coords - INFO - syri:134 - Reading input from BAM file
+2026-11-26 17:43:02,510 - Reading Coords - INFO - syri:134 - Filtering low-quality alignments (alignment quality < 90, alignment length < 100)
+2026-11-26 17:44:06,422 - syri - INFO - syri:215 - starting
+2026-11-26 17:44:06,432 - syri - INFO - syri:215 - Analysing chromosomes: ['Chr1', 'Chr2', 'Chr3', 'Chr4', 'Chr5']
+2026-11-26 17:44:06,571 - syri.Chr1 - INFO - mapstar:48 - Chr1 (1865, 11)
+2026-11-26 17:44:06,572 - syri.Chr1 - INFO - mapstar:48 - Identifying Synteny for chromosome Chr1
+2026-11-26 17:44:07,823 - syri.Chr1 - INFO - mapstar:48 - Identifying Inversions for chromosome Chr1
+2026-11-26 17:44:09,516 - syri.Chr1 - INFO - mapstar:48 - Identifying translocation and duplication for chromosome Chr1
+2026-11-26 17:44:10,858 - syri.Chr2 - INFO - mapstar:48 - Chr2 (926, 11)
+2026-11-26 17:44:10,860 - syri.Chr2 - INFO - mapstar:48 - Identifying Synteny for chromosome Chr2
+2026-11-26 17:44:11,058 - syri.Chr2 - INFO - mapstar:48 - Identifying Inversions for chromosome Chr2
+2026-11-26 17:44:11,159 - syri.Chr2 - INFO - mapstar:48 - Identifying translocation and duplication for chromosome Chr2
+2026-11-26 17:44:11,505 - syri.Chr3 - INFO - mapstar:48 - Chr3 (1077, 11)
+2026-11-26 17:44:11,506 - syri.Chr3 - INFO - mapstar:48 - Identifying Synteny for chromosome Chr3
+2026-11-26 17:44:11,738 - syri.Chr3 - INFO - mapstar:48 - Identifying Inversions for chromosome Chr3
+2026-11-26 17:44:11,845 - syri.Chr3 - INFO - mapstar:48 - Identifying translocation and duplication for chromosome Chr3
+2026-11-26 17:44:12,271 - syri.Chr4 - INFO - mapstar:48 - Chr4 (1129, 11)
+2026-11-26 17:44:12,272 - syri.Chr4 - INFO - mapstar:48 - Identifying Synteny for chromosome Chr4
+2026-11-26 17:44:12,521 - syri.Chr4 - INFO - mapstar:48 - Identifying Inversions for chromosome Chr4
+2026-11-26 17:44:12,656 - syri.Chr4 - INFO - mapstar:48 - Identifying translocation and duplication for chromosome Chr4
+2026-11-26 17:44:13,097 - syri.Chr5 - INFO - mapstar:48 - Chr5 (1598, 11)
+2026-11-26 17:44:13,098 - syri.Chr5 - INFO - mapstar:48 - Identifying Synteny for chromosome Chr5
+2026-11-26 17:44:14,082 - syri.Chr5 - INFO - mapstar:48 - Identifying Inversions for chromosome Chr5
+2026-11-26 17:44:14,228 - syri.Chr5 - INFO - mapstar:48 - Identifying translocation and duplication for chromosome Chr5
+2026-11-26 17:44:14,943 - getCTX - INFO - syri:215 - Identifying cross-chromosomal translocation and duplication for chromosome
+2026-11-26 17:44:17,039 - local_variation - INFO - syri:226 - Finding SVs in synOut.txt, invOut.txt, TLOut.txt, invTLOut.txt, ctxOut.txt
+2026-11-26 17:44:43,342 - local_variation - INFO - syri:246 - Finding SNPs and small indels
+2026-11-26 17:45:46,149 - local_variation - INFO - syri:258 - Combining outputs
+2026-11-26 17:45:46,157 - local_variation - INFO - syri:263 - Generating table output
+2026-11-26 17:46:30,993 - local_variation - INFO - syri:268 - Generating VCF
+2026-11-26 17:46:53,262 - local_variation - INFO - syri:276 - Finished syri

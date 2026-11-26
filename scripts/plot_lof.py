@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Figure 7: two ways a gene can be lost in an accession (Phase 5), run in env `map`.
+"""Figure 25: two ways a gene can be lost in an accession (Phase 5), run in env `map`.
 
 Run after scripts/lof_genes.py:
     python scripts/plot_lof.py
 
 Inputs (read only): results/pav/pav_long.tsv.gz, results/variants/lof_genes.tsv.gz
-Output: results/figures/fig7_lost_vs_broken_genes.png (300 dpi)
+Output: results/figures/25_geneloss_lost_vs_broken__grouped_stacked_bar_chart.png (300 dpi)
     (a) genes called absent (deleted, no reads) vs genes called present but carrying a HIGH-impact variant
     (b) which kinds of HIGH effect the present-but-broken genes carry (a gene with two kinds counts in both)
 Descriptive only: no statistical test. HIGH effects are predictions, not proof that the protein is lost.
@@ -40,7 +40,7 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--pav", default="results/pav/pav_long.tsv.gz")
     ap.add_argument("--lof", default="results/variants/lof_genes.tsv.gz")
-    ap.add_argument("--out", default="results/figures/fig7_lost_vs_broken_genes.png")
+    ap.add_argument("--out", default="results/figures/25_geneloss_lost_vs_broken__grouped_stacked_bar_chart.png")
     a = ap.parse_args()
 
     pav = pd.read_csv(a.pav, sep="\t", usecols=["gene", "accession", "call"])
