@@ -5,7 +5,7 @@ Run:
     python scripts/plot_pnps.py
 
 Inputs (read only): data/reference/TAIR10.1_Col-0/GCF_000001735.4/genomic.gff and *_genomic.fna (CDS),
-    results/variants/annotated.vcf.gz (SnpEff), results/pav/pav_long.tsv.gz, results/pav/nlr_genes.tsv
+    results/variants/annotated.vcf.gz (SnpEff), results/pav/pav_long.tsv.gz, results/analysis/nlr_genes.tsv
 Outputs: results/variants/pnps_genes.tsv, results/figures/38_function_nlr_selection__pnps_dot_plot_ci_scatter_plot.png
 
 Sites: synonymous (S) and non-synonymous (N) sites of the longest RefSeq CDS of each gene, Nei-Gojobori counting
@@ -168,7 +168,7 @@ def main():
     ap.add_argument("--fna", default="data/reference/TAIR10.1_Col-0/GCF_000001735.4/GCF_000001735.4_TAIR10.1_genomic.fna")
     ap.add_argument("--vcf", default="results/variants/annotated.vcf.gz")
     ap.add_argument("--pav", default="results/pav/pav_long.tsv.gz")
-    ap.add_argument("--nlr", default="results/pav/nlr_genes.tsv")
+    ap.add_argument("--nlr", default="results/analysis/nlr_genes.tsv")
     ap.add_argument("--table", default="results/variants/pnps_genes.tsv")
     ap.add_argument("--out", default="results/figures/38_function_nlr_selection__pnps_dot_plot_ci_scatter_plot.png")
     a = ap.parse_args()

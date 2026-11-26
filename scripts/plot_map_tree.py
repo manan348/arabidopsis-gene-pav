@@ -5,7 +5,7 @@ Run:
     python scripts/plot_map_tree.py
 
 Inputs (read only): data/meta/accession_coords.tsv (1001 Genomes coordinates, from the AraPheno API),
-    results/variants/snp_distance_matrix.tsv (fig 31), results/pav/pav_long.tsv.gz,
+    results/analysis/snp_distance_matrix.tsv (fig 31), results/pav/pav_long.tsv.gz,
     data/reference/ne_110m_land/ne_110m_land.shp (Natural Earth 1:110m land, public domain; for the outline only)
 Output: results/figures/32_relatedness_origins__geographic_map_upgma_dendrogram.png (300 dpi)
 
@@ -40,7 +40,7 @@ plt.rcParams.update({
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--coords", default="data/meta/accession_coords.tsv")
-    ap.add_argument("--dist", default="results/variants/snp_distance_matrix.tsv")
+    ap.add_argument("--dist", default="results/analysis/snp_distance_matrix.tsv")
     ap.add_argument("--pav", default="results/pav/pav_long.tsv.gz")
     ap.add_argument("--land", default="data/reference/ne_110m_land/ne_110m_land.shp")
     ap.add_argument("--out", default="results/figures/32_relatedness_origins__geographic_map_upgma_dendrogram.png")

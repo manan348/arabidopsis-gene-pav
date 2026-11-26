@@ -6,7 +6,7 @@ Run:
 
 Input (read only): results/variants/filtered_gt.tsv.gz
     columns: CHROM POS TYPE QUAL DP and then one genotype per accession (Col-0 ... Ale-Stenar-44-4)
-Output: results/figures/31_relatedness_snps__pcoa_plot.png (300 dpi); results/variants/snp_distance_matrix.tsv
+Output: results/figures/31_relatedness_snps__pcoa_plot.png (300 dpi); results/analysis/snp_distance_matrix.tsv
 
 Method: only biallelic SNPs (genotype 0 or 1; everything else is treated as missing, because low depth
 leaves many missing genotypes). For every pair of accessions, distance = share of sites at which the two
@@ -70,7 +70,7 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--gt", default="results/variants/filtered_gt.tsv.gz")
     ap.add_argument("--out", default="results/figures/31_relatedness_snps__pcoa_plot.png")
-    ap.add_argument("--matrix", default="results/variants/snp_distance_matrix.tsv")
+    ap.add_argument("--matrix", default="results/analysis/snp_distance_matrix.tsv")
     a = ap.parse_args()
 
     D, both, n_snp = pair_distances(a.gt)

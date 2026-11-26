@@ -5,7 +5,7 @@ Run (after scripts/plot_diversity.py and scripts/plot_nlr_map.py):
     python scripts/plot_circos.py
 
 Inputs (read only): data/reference/genes.bed, results/variants/pi_windows.tsv, results/pav/pav_long.tsv.gz,
-    results/sv/pass_deletions.tsv, results/pav/nlr_genes.tsv
+    results/sv/pass_deletions.tsv, results/analysis/nlr_genes.tsv
 Output: results/figures/02_overview_genome__circos_plot.png
 
 Rings, outside to inside (500 kb windows, Col-0 coordinates): chromosomes (ticks every 5 Mb, centromere dark),
@@ -42,7 +42,7 @@ def main():
     ap.add_argument("--pi", default="results/variants/pi_windows.tsv")
     ap.add_argument("--pav", default="results/pav/pav_long.tsv.gz")
     ap.add_argument("--dels", default="results/sv/pass_deletions.tsv")
-    ap.add_argument("--nlr", default="results/pav/nlr_genes.tsv")
+    ap.add_argument("--nlr", default="results/analysis/nlr_genes.tsv")
     ap.add_argument("--win", type=int, default=500_000)
     ap.add_argument("--out", default="results/figures/02_overview_genome__circos_plot.png")
     a = ap.parse_args()

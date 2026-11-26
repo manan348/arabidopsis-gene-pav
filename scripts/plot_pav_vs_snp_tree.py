@@ -4,8 +4,8 @@
 Run:
     python scripts/plot_pav_vs_snp_tree.py
 
-Inputs (read only): results/pav/pav_long.tsv.gz, results/variants/snp_distance_matrix.tsv
-Outputs: results/figures/33_relatedness_pav_vs_snp__tanglegram_mantel_test.png (300 dpi), results/pav/pav_distance_matrix.tsv
+Inputs (read only): results/pav/pav_long.tsv.gz, results/analysis/snp_distance_matrix.tsv
+Outputs: results/figures/33_relatedness_pav_vs_snp__tanglegram_mantel_test.png (300 dpi), results/analysis/pav_distance_matrix.tsv
 
 PAV distance between two accessions = number of genes called absent in exactly one of them.
 SNP distance = share of differing sites (fig 31). Both trees: UPGMA (average linkage).
@@ -59,8 +59,8 @@ def mantel_exact(A, B, spearman=False):
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--pav", default="results/pav/pav_long.tsv.gz")
-    ap.add_argument("--snp", default="results/variants/snp_distance_matrix.tsv")
-    ap.add_argument("--matrix", default="results/pav/pav_distance_matrix.tsv")
+    ap.add_argument("--snp", default="results/analysis/snp_distance_matrix.tsv")
+    ap.add_argument("--matrix", default="results/analysis/pav_distance_matrix.tsv")
     ap.add_argument("--out", default="results/figures/33_relatedness_pav_vs_snp__tanglegram_mantel_test.png")
     a = ap.parse_args()
 

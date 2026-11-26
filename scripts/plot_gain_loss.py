@@ -5,7 +5,7 @@ Run:
     python scripts/plot_gain_loss.py
 
 Inputs (read only): results/pav/pav_long.tsv.gz, results/variants/lof_genes.tsv.gz
-Outputs: results/figures/26_geneloss_lost_broken_gained__bar_chart_error_bars_scatter.png (300 dpi), results/pav/gene_gains.tsv (gain candidates)
+Outputs: results/figures/26_geneloss_lost_broken_gained__bar_chart_error_bars_scatter.png (300 dpi), results/analysis/gene_gains.tsv (gain candidates)
 
   lost    = read call `absent` (Phase 4)
   broken  = read call `present` and a HIGH-impact variant (SnpEff, Phase 5)
@@ -47,7 +47,7 @@ def main():
     ap.add_argument("--lof", default="results/variants/lof_genes.tsv.gz")
     ap.add_argument("--gain", type=float, default=2.0)
     ap.add_argument("--out", default="results/figures/26_geneloss_lost_broken_gained__bar_chart_error_bars_scatter.png")
-    ap.add_argument("--table", default="results/pav/gene_gains.tsv")
+    ap.add_argument("--table", default="results/analysis/gene_gains.tsv")
     a = ap.parse_args()
 
     p = pd.read_csv(a.pav, sep="\t", usecols=["gene", "accession", "norm_depth", "breadth_q10", "call"])

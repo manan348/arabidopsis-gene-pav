@@ -5,7 +5,7 @@ Run:
     python scripts/plot_diversity.py
 
 Inputs (read only): results/variants/filtered_gt.tsv.gz (chrom, pos, type, qual, depth, 8 haploid genotypes),
-    data/reference/genes.bed, results/pav/pav_long.tsv.gz, results/pav/nlr_genes.tsv
+    data/reference/genes.bed, results/pav/pav_long.tsv.gz, results/analysis/nlr_genes.tsv
 Outputs: results/variants/pi_windows.tsv (100 kb windows), results/variants/pi_genes.tsv (pi per gene),
     results/figures/15_variants_diversity__sliding_window_plot_violin_plot.png (renumbered later into the sequence)
 
@@ -43,7 +43,7 @@ def main():
     ap.add_argument("--gt", default="results/variants/filtered_gt.tsv.gz")
     ap.add_argument("--bed", default="data/reference/genes.bed")
     ap.add_argument("--pav", default="results/pav/pav_long.tsv.gz")
-    ap.add_argument("--nlr", default="results/pav/nlr_genes.tsv")
+    ap.add_argument("--nlr", default="results/analysis/nlr_genes.tsv")
     ap.add_argument("--win", type=int, default=100_000)
     ap.add_argument("--windows", default="results/variants/pi_windows.tsv")
     ap.add_argument("--genes", default="results/variants/pi_genes.tsv")

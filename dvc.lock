@@ -1,0 +1,410 @@
+schema: '2.0'
+stages:
+  qc:
+    cmd: for s in Col-0 An-1 Kyoto Kondara Cvi-0 Ler-1 Se-0 Ale-Stenar-44-4; do bash
+      scripts/trim_subsample.sh $s; done
+    deps:
+    - path: config/samples.tsv
+      hash: md5
+      md5: 00bc963a324d5e2e2d35f8f64becac47
+      size: 588
+    - path: scripts/trim_subsample.sh
+      hash: md5
+      md5: e12255fac6713d89d34dca65fb2c524f
+      size: 1548
+    outs:
+    - path: results/fastp
+      hash: md5
+      md5: 66f8da6121efe4c00ff29a27eb6f00bb.dir
+      size: 5368252
+      nfiles: 34
+    - path: results/qc_final
+      hash: md5
+      md5: f24f673d0b60bee18f64c3cdaf1ca4cb.dir
+      size: 16846470
+      nfiles: 32
+    - path: results/qc_raw
+      hash: md5
+      md5: d84bdb432cec2852428835604d1b0a69.dir
+      size: 4243622
+      nfiles: 8
+  mapping:
+    cmd: for s in Col-0 An-1 Kyoto Kondara Cvi-0 Ler-1 Se-0 Ale-Stenar-44-4; do bash
+      scripts/map_sample.sh $s; done && multiqc results/qc_final results/fastp -o
+      results/multiqc -n multiqc_final && multiqc results/mapping -o results/multiqc
+      -n multiqc_mapping
+    deps:
+    - path: results/qc_final
+      hash: md5
+      md5: f24f673d0b60bee18f64c3cdaf1ca4cb.dir
+      size: 16846470
+      nfiles: 32
+    - path: scripts/map_sample.sh
+      hash: md5
+      md5: abe159782794586b648c529f2030631d
+      size: 2658
+    outs:
+    - path: results/mapping
+      hash: md5
+      md5: 3dbca03435a76ff03adbd470e065bf5d.dir
+      size: 4357706
+      nfiles: 58
+    - path: results/multiqc
+      hash: md5
+      md5: 39746ebb98fc5a0985e34310da46835b.dir
+      size: 18583089
+      nfiles: 81
+  pav:
+    cmd: for s in Col-0 An-1 Kyoto Kondara Cvi-0 Ler-1 Se-0 Ale-Stenar-44-4; do bash
+      scripts/pav_depth.sh $s; done && python scripts/build_pav.py
+    deps:
+    - path: data/reference/genes.bed
+      hash: md5
+      md5: 47e7216f0bfa5f8c5b96b3b485cc7234
+      size: 1180598
+    - path: results/mapping
+      hash: md5
+      md5: 3dbca03435a76ff03adbd470e065bf5d.dir
+      size: 4357706
+      nfiles: 58
+    - path: scripts/build_pav.py
+      hash: md5
+      md5: a727a59beca966f09c91981597a90c4c
+      size: 4980
+    - path: scripts/pav_depth.sh
+      hash: md5
+      md5: c33c8576de9b429984f025bdba032da9
+      size: 1228
+    outs:
+    - path: results/pav
+      hash: md5
+      md5: 7ed896984d354e8c0b85059d159b7678.dir
+      size: 23089943
+      nfiles: 123
+  variants:
+    cmd: for c in NC_003070.9 NC_003071.7 NC_003074.8 NC_003075.7 NC_003076.8; do
+      bash scripts/call_variants.sh $c; done && bcftools concat -Oz -o results/variants/all_raw.vcf.gz
+      results/variants/raw/*.vcf.gz && bcftools view -i 'QUAL>=20 && INFO/DP>=20 &&
+      INFO/DP<=130' -Oz -o results/variants/filtered.vcf.gz results/variants/all_raw.vcf.gz
+      && bash scripts/annotate_snpeff.sh && python scripts/lof_genes.py
+    deps:
+    - path: results/mapping
+      hash: md5
+      md5: 3dbca03435a76ff03adbd470e065bf5d.dir
+      size: 4357706
+      nfiles: 58
+    - path: results/pav
+      hash: md5
+      md5: 7ed896984d354e8c0b85059d159b7678.dir
+      size: 23089943
+      nfiles: 123
+    - path: scripts/annotate_snpeff.sh
+      hash: md5
+      md5: 38a6acb31a2194d4e909f5a07c8392c1
+      size: 1404
+    - path: scripts/call_variants.sh
+      hash: md5
+      md5: 93574c8f48f7c7949ff7f350fab81db2
+      size: 2088
+    - path: scripts/lof_genes.py
+      hash: md5
+      md5: 1b2eb64d15a78bd1d2e5d1f732a1368f
+      size: 5825
+    outs:
+    - path: results/variants/annotated.vcf.gz
+      hash: md5
+      md5: fc26cf54993809d2e47dd56fc8051115
+      size: 262866673
+    - path: results/variants/filtered.vcf.gz
+      hash: md5
+      md5: b1118dc251c6a5e0cbe8c639a4a17eb2
+      size: 137268384
+    - path: results/variants/filtered_gt.tsv.gz
+      hash: md5
+      md5: 0be3af092f2fd8e496c965bc6d25faae
+      size: 19007208
+    - path: results/variants/high_impact.tsv.gz
+      hash: md5
+      md5: 8b3487498f9fb77011e75557ccd1c74e
+      size: 1353489
+    - path: results/variants/lof_genes.tsv.gz
+      hash: md5
+      md5: 43779c3518cf1e7227ad63cb9ba804f0
+      size: 76426
+  deletions:
+    cmd: for s in Col-0 An-1 Kyoto Kondara Cvi-0 Ler-1 Se-0 Ale-Stenar-44-4; do bash
+      scripts/call_sv.sh $s; done && python scripts/sv_vs_pav.py
+    deps:
+    - path: results/mapping
+      hash: md5
+      md5: 3dbca03435a76ff03adbd470e065bf5d.dir
+      size: 4357706
+      nfiles: 58
+    - path: results/pav
+      hash: md5
+      md5: 7ed896984d354e8c0b85059d159b7678.dir
+      size: 23089943
+      nfiles: 123
+    - path: scripts/call_sv.sh
+      hash: md5
+      md5: a839aa79a338da372998681203f76b4c
+      size: 1134
+    - path: scripts/sv_vs_pav.py
+      hash: md5
+      md5: 67c18a23f25c13fd2ac3641623474c64
+      size: 6091
+    outs:
+    - path: results/sv
+      hash: md5
+      md5: 9ddb78a9a0e0f0f98dd9d091ed311570.dir
+      size: 1240913
+      nfiles: 36
+  assemblies:
+    cmd: for s in An-1 Cvi-0 Kyoto Ler-1; do bash scripts/run_liftoff.sh $s; done
+      && python scripts/compare_liftoff_pav.py
+    deps:
+    - path: results/pav
+      hash: md5
+      md5: 7ed896984d354e8c0b85059d159b7678.dir
+      size: 23089943
+      nfiles: 123
+    - path: scripts/compare_liftoff_pav.py
+      hash: md5
+      md5: 98571eea610ca4e8d14a55d17abbbba4
+      size: 6632
+    - path: scripts/run_liftoff.sh
+      hash: md5
+      md5: a258f96197a1cae0b16bc584f7067b4e
+      size: 2330
+    outs:
+    - path: results/assembly/liftoff_vs_pav_genes.tsv.gz
+      hash: md5
+      md5: 217f377ef49d683cee33c8ef0b6fbc4c
+      size: 1691914
+  far4_coverage:
+    cmd: samtools depth -a -Q 10 -r NC_003074.8:16110001-16150000 
+      data/bam/{Col-0,An-1,Kyoto,Kondara,Cvi-0,Ler-1,Se-0,Ale-Stenar-44-4}/*.markdup.bam
+      > results/assembly/fig16_depth.tsv
+    deps:
+    - path: results/mapping
+      hash: md5
+      md5: 3dbca03435a76ff03adbd470e065bf5d.dir
+      size: 4357706
+      nfiles: 58
+    - path: scripts/plot_coverage_track.py
+      hash: md5
+      md5: 3386ad8606287b6cfc325826a7a9de17
+      size: 6429
+    outs:
+    - path: results/assembly/fig16_depth.tsv
+      hash: md5
+      md5: 55eebee20768781d1bb3b0e03e35dabd
+      size: 1592210
+  go:
+    cmd: Rscript scripts/go_enrichment.R
+    deps:
+    - path: results/pav
+      hash: md5
+      md5: 7ed896984d354e8c0b85059d159b7678.dir
+      size: 23089943
+      nfiles: 123
+    - path: results/variants/lof_genes.tsv.gz
+      hash: md5
+      md5: 43779c3518cf1e7227ad63cb9ba804f0
+      size: 76426
+    - path: scripts/go_enrichment.R
+      hash: md5
+      md5: a43f080143cef63b2ae6830bac9c6d10
+      size: 8073
+    outs:
+    - path: results/go
+      hash: md5
+      md5: 97780cf9ee2d0f02cc58c41a15f92bab.dir
+      size: 9141
+      nfiles: 1
+  relatedness:
+    cmd: python scripts/plot_snp_pca.py && python scripts/plot_pav_vs_snp_tree.py
+    deps:
+    - path: results/pav
+      hash: md5
+      md5: 7ed896984d354e8c0b85059d159b7678.dir
+      size: 23089943
+      nfiles: 123
+    - path: results/variants/filtered_gt.tsv.gz
+      hash: md5
+      md5: 0be3af092f2fd8e496c965bc6d25faae
+      size: 19007208
+    - path: scripts/plot_pav_vs_snp_tree.py
+      hash: md5
+      md5: f84e8ecd21dc44ab9233249fc3029877
+      size: 6454
+    - path: scripts/plot_snp_pca.py
+      hash: md5
+      md5: 8469049854f28e1efa962bc947afba96
+      size: 5960
+    outs:
+    - path: results/analysis/pav_distance_matrix.tsv
+      hash: md5
+      md5: f9cde082a3f38fd1e566dc06f0fa474a
+      size: 366
+    - path: results/analysis/snp_distance_matrix.tsv
+      hash: md5
+      md5: edac628b3d1752106029490122402413
+      size: 546
+  gene_gains:
+    cmd: python scripts/plot_gain_loss.py
+    deps:
+    - path: results/pav
+      hash: md5
+      md5: 7ed896984d354e8c0b85059d159b7678.dir
+      size: 23089943
+      nfiles: 123
+    - path: results/variants/lof_genes.tsv.gz
+      hash: md5
+      md5: 43779c3518cf1e7227ad63cb9ba804f0
+      size: 76426
+    - path: scripts/plot_gain_loss.py
+      hash: md5
+      md5: 171428a0bb4a87a9ae2aaabd9dcb7da6
+      size: 6742
+    outs:
+    - path: results/analysis/gene_gains.tsv
+      hash: md5
+      md5: fe95a2c0b5b84017f63c13d84a42d01f
+      size: 28918
+  nlr_genes:
+    cmd: python scripts/plot_nlr_map.py
+    deps:
+    - path: results/pav
+      hash: md5
+      md5: 7ed896984d354e8c0b85059d159b7678.dir
+      size: 23089943
+      nfiles: 123
+    - path: scripts/plot_nlr_map.py
+      hash: md5
+      md5: c847837993c11252cfe45a63c6645e8b
+      size: 7007
+    outs:
+    - path: results/analysis/nlr_genes.tsv
+      hash: md5
+      md5: ef480927cd72aad7b7baa87fa02e90aa
+      size: 12321
+  diversity:
+    cmd: python scripts/plot_diversity.py
+    deps:
+    - path: results/analysis/nlr_genes.tsv
+      hash: md5
+      md5: ef480927cd72aad7b7baa87fa02e90aa
+      size: 12321
+    - path: results/pav
+      hash: md5
+      md5: 7ed896984d354e8c0b85059d159b7678.dir
+      size: 23089943
+      nfiles: 123
+    - path: results/variants/filtered_gt.tsv.gz
+      hash: md5
+      md5: 0be3af092f2fd8e496c965bc6d25faae
+      size: 19007208
+    - path: scripts/plot_diversity.py
+      hash: md5
+      md5: cf99e237961445366629153b9e95906b
+      size: 9247
+    outs:
+    - path: results/variants/pi_genes.tsv
+      hash: md5
+      md5: 28569e81ed952ad4b295377a8c80785a
+      size: 1102232
+    - path: results/variants/pi_windows.tsv
+      hash: md5
+      md5: 8760a9d4e3528b0eaead039074727bfe
+      size: 42394
+  selection:
+    cmd: python scripts/plot_pnps.py
+    deps:
+    - path: results/analysis/nlr_genes.tsv
+      hash: md5
+      md5: ef480927cd72aad7b7baa87fa02e90aa
+      size: 12321
+    - path: results/pav
+      hash: md5
+      md5: 7ed896984d354e8c0b85059d159b7678.dir
+      size: 23089943
+      nfiles: 123
+    - path: results/variants/annotated.vcf.gz
+      hash: md5
+      md5: fc26cf54993809d2e47dd56fc8051115
+      size: 262866673
+    - path: scripts/plot_pnps.py
+      hash: md5
+      md5: 3aa5230a25eaf1438942c4bad8a55817
+      size: 11901
+    outs:
+    - path: results/variants/pnps_genes.tsv
+      hash: md5
+      md5: d8b8d307699376b7533c8a16cad26aaa
+      size: 1586455
+  known_genes:
+    cmd: python scripts/check_known_genes.py
+    deps:
+    - path: results/assembly/liftoff_vs_pav_genes.tsv.gz
+      hash: md5
+      md5: 217f377ef49d683cee33c8ef0b6fbc4c
+      size: 1691914
+    - path: results/pav
+      hash: md5
+      md5: 7ed896984d354e8c0b85059d159b7678.dir
+      size: 23089943
+      nfiles: 123
+    - path: results/variants/lof_genes.tsv.gz
+      hash: md5
+      md5: 43779c3518cf1e7227ad63cb9ba804f0
+      size: 76426
+    - path: scripts/check_known_genes.py
+      hash: md5
+      md5: 379832c1864060022d37fcf02b0fd2ea
+      size: 3002
+    outs:
+    - path: results/analysis/known_genes_check.tsv
+      hash: md5
+      md5: 29e9a16f5da1412ed0b783cd13dcad48
+      size: 8872
+  explorer:
+    cmd: python scripts/make_pav_explorer.py
+    deps:
+    - path: results/assembly/liftoff_vs_pav_genes.tsv.gz
+      hash: md5
+      md5: 217f377ef49d683cee33c8ef0b6fbc4c
+      size: 1691914
+    - path: results/go
+      hash: md5
+      md5: 97780cf9ee2d0f02cc58c41a15f92bab.dir
+      size: 9141
+      nfiles: 1
+    - path: results/pav
+      hash: md5
+      md5: 7ed896984d354e8c0b85059d159b7678.dir
+      size: 23089943
+      nfiles: 123
+    - path: results/sv
+      hash: md5
+      md5: 9ddb78a9a0e0f0f98dd9d091ed311570.dir
+      size: 1240913
+      nfiles: 36
+    - path: results/variants/lof_genes.tsv.gz
+      hash: md5
+      md5: 43779c3518cf1e7227ad63cb9ba804f0
+      size: 76426
+    - path: scripts/make_pav_explorer.py
+      hash: md5
+      md5: 1481eaafe6d0012f2603975af3ce432c
+      size: 4931
+    - path: scripts/pav_explorer_template.html
+      hash: md5
+      md5: d3f9b653dba64f8023a81bcfdf9ffb1c
+      size: 8320
+    outs:
+    - path: results/interactive
+      hash: md5
+      md5: cbaee650b0ac088a22de0b2b6c4f1693.dir
+      size: 257125
+      nfiles: 1

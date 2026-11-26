@@ -1,0 +1,189 @@
+# DVC pipeline: how each result folder is made from the previous ones.
+# DagsHub draws this file as a connected graph. The stages were run step by step (see each script's header for
+# its conda environment); the hashes in dvc.lock were recorded with `dvc commit`, not by re-running.
+# To re-run, use `dvc repro` from WSL Ubuntu (the commands are bash). Reads, BAM files and assemblies are local
+# inputs and are not tracked.
+
+vars:
+  - samples: Col-0 An-1 Kyoto Kondara Cvi-0 Ler-1 Se-0 Ale-Stenar-44-4
+  - assembled: An-1 Cvi-0 Kyoto Ler-1
+  - chroms: NC_003070.9 NC_003071.7 NC_003074.8 NC_003075.7 NC_003076.8
+
+stages:
+  qc:
+    desc: Trim with fastp, subsample to about 15x, FastQC before and after
+    cmd: for s in ${samples}; do bash scripts/trim_subsample.sh $s; done
+    deps:
+      - config/samples.tsv
+      - scripts/trim_subsample.sh
+    outs:
+      - results/fastp
+      - results/qc_raw
+      - results/qc_final
+
+  mapping:
+    desc: bowtie2 to TAIR10.1, mark duplicates, samtools and mosdepth QC, MultiQC
+    cmd: >-
+      for s in ${samples}; do bash scripts/map_sample.sh $s; done &&
+      multiqc results/qc_final results/fastp -o results/multiqc -n multiqc_final &&
+      multiqc results/mapping -o results/multiqc -n multiqc_mapping
+    deps:
+      - scripts/map_sample.sh
+      - results/qc_final
+    outs:
+      - results/mapping
+      - results/multiqc
+
+  pav:
+    desc: Per-gene depth (MAPQ >= 10) and presence/absence calls for 27,444 genes
+    cmd: for s in ${samples}; do bash scripts/pav_depth.sh $s; done && python scripts/build_pav.py
+    deps:
+      - scripts/pav_depth.sh
+      - scripts/build_pav.py
+      - data/reference/genes.bed
+      - results/mapping
+    outs:
+      - results/pav
+
+  variants:
+    desc: SNPs and indels with bcftools, filter, SnpEff effects, genes with HIGH-impact variants
+    cmd: >-
+      for c in ${chroms}; do bash scripts/call_variants.sh $c; done &&
+      bcftools concat -Oz -o results/variants/all_raw.vcf.gz results/variants/raw/*.vcf.gz &&
+      bcftools view -i 'QUAL>=20 && INFO/DP>=20 && INFO/DP<=130' -Oz -o results/variants/filtered.vcf.gz results/variants/all_raw.vcf.gz &&
+      bash scripts/annotate_snpeff.sh &&
+      python scripts/lof_genes.py
+    deps:
+      - scripts/call_variants.sh
+      - scripts/annotate_snpeff.sh
+      - scripts/lof_genes.py
+      - results/mapping
+      - results/pav
+    outs:
+      - results/variants/filtered.vcf.gz
+      - results/variants/filtered_gt.tsv.gz
+      - results/variants/high_impact.tsv.gz
+      - results/variants/lof_genes.tsv.gz
+      - results/variants/annotated.vcf.gz:
+          cache: false   # 260 MB, kept local only (not pushed to DagsHub)
+
+  deletions:
+    desc: Delly deletions per accession, compared with the absent calls
+    cmd: for s in ${samples}; do bash scripts/call_sv.sh $s; done && python scripts/sv_vs_pav.py
+    deps:
+      - scripts/call_sv.sh
+      - scripts/sv_vs_pav.py
+      - results/mapping
+      - results/pav
+    outs:
+      - results/sv
+
+  assemblies:
+    desc: Liftoff of the Col-0 genes onto 4 assemblies, compared with the read-based calls
+    cmd: for s in ${assembled}; do bash scripts/run_liftoff.sh $s; done && python scripts/compare_liftoff_pav.py
+    deps:
+      - scripts/run_liftoff.sh
+      - scripts/compare_liftoff_pav.py
+      - results/pav
+    outs:
+      - results/assembly/liftoff_vs_pav_genes.tsv.gz
+
+  far4_coverage:
+    desc: Read depth over the FAR4 deletion in all 8 accessions (example gene, fig 23)
+    cmd: >-
+      samtools depth -a -Q 10 -r NC_003074.8:16110001-16150000 data/bam/{Col-0,An-1,Kyoto,Kondara,Cvi-0,Ler-1,Se-0,Ale-Stenar-44-4}/*.markdup.bam
+      > results/assembly/fig16_depth.tsv
+    deps:
+      - scripts/plot_coverage_track.py
+      - results/mapping
+    outs:
+      - results/assembly/fig16_depth.tsv
+
+  go:
+    desc: GO over-representation of absent and broken genes (clusterProfiler, BH FDR)
+    cmd: Rscript scripts/go_enrichment.R
+    deps:
+      - scripts/go_enrichment.R
+      - results/pav
+      - results/variants/lof_genes.tsv.gz
+    outs:
+      - results/go
+
+  relatedness:
+    desc: SNP distances and gene-loss distances between accessions (PCoA, tanglegram, Mantel test)
+    cmd: python scripts/plot_snp_pca.py && python scripts/plot_pav_vs_snp_tree.py
+    deps:
+      - scripts/plot_snp_pca.py
+      - scripts/plot_pav_vs_snp_tree.py
+      - results/variants/filtered_gt.tsv.gz
+      - results/pav
+    outs:
+      - results/analysis/snp_distance_matrix.tsv
+      - results/analysis/pav_distance_matrix.tsv
+
+  gene_gains:
+    desc: Genes lost, broken or possibly gained per accession
+    cmd: python scripts/plot_gain_loss.py
+    deps:
+      - scripts/plot_gain_loss.py
+      - results/pav
+      - results/variants/lof_genes.tsv.gz
+    outs:
+      - results/analysis/gene_gains.tsv
+
+  nlr_genes:
+    desc: NLR disease-resistance genes, how many are variable (Fisher's exact test)
+    cmd: python scripts/plot_nlr_map.py
+    deps:
+      - scripts/plot_nlr_map.py
+      - results/pav
+    outs:
+      - results/analysis/nlr_genes.tsv
+
+  diversity:
+    desc: Nucleotide diversity pi in windows and per gene, NLR vs other genes
+    cmd: python scripts/plot_diversity.py
+    deps:
+      - scripts/plot_diversity.py
+      - results/variants/filtered_gt.tsv.gz
+      - results/analysis/nlr_genes.tsv
+      - results/pav
+    outs:
+      - results/variants/pi_genes.tsv
+      - results/variants/pi_windows.tsv
+
+  selection:
+    desc: pN/pS of NLR, variable and core genes (Nei-Gojobori sites, bootstrap, permutation test)
+    cmd: python scripts/plot_pnps.py
+    deps:
+      - scripts/plot_pnps.py
+      - results/variants/annotated.vcf.gz
+      - results/analysis/nlr_genes.tsv
+      - results/pav
+    outs:
+      - results/variants/pnps_genes.tsv
+
+  known_genes:
+    desc: Check the calls against well-studied genes from the literature (RPS5, RPM1, RPS4/RRS1, FRI ...)
+    cmd: python scripts/check_known_genes.py
+    deps:
+      - scripts/check_known_genes.py
+      - results/pav
+      - results/assembly/liftoff_vs_pav_genes.tsv.gz
+      - results/variants/lof_genes.tsv.gz
+    outs:
+      - results/analysis/known_genes_check.tsv
+
+  explorer:
+    desc: Interactive PAV explorer (Plotly HTML)
+    cmd: python scripts/make_pav_explorer.py
+    deps:
+      - scripts/make_pav_explorer.py
+      - scripts/pav_explorer_template.html
+      - results/pav
+      - results/go
+      - results/sv
+      - results/assembly/liftoff_vs_pav_genes.tsv.gz
+      - results/variants/lof_genes.tsv.gz
+    outs:
+      - results/interactive

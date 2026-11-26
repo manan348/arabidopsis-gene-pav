@@ -106,7 +106,8 @@ dvc pull                                  # result tables from DagsHub
 # 2. raw data (not in git): reads from ENA, assemblies from NCBI
 bash scripts/download_reads.sh config/samples.tsv data/meta/selected_runs.tsv data/raw
 
-# 3. main steps (each script documents its inputs, outputs and conda environment)
+# 3. the whole pipeline is defined in dvc.yaml (15 stages); `dvc dag` shows it, `dvc repro` re-runs it (WSL).
+#    The main steps, one by one (each script documents its inputs, outputs and conda environment):
 bash scripts/trim_subsample.sh SAMPLE     # QC and subsampling, per accession
 bash scripts/map_sample.sh SAMPLE         # mapping, per accession
 bash scripts/pav_depth.sh SAMPLE          # per-gene depth, per accession
@@ -126,11 +127,13 @@ Hardware used: 4 CPU cores and 3.8 GB RAM. All steps fit in this budget.
 
 ```
 arabidopsis-gene-pav/
+├── dvc.yaml         pipeline: 15 stages from reads to results, with inputs and outputs
+├── dvc.lock         hashes of every stage's inputs and outputs
 ├── config/          sample table (accessions, SRA runs)
 ├── data/meta/       accession coordinates and download lists
 ├── docs/            figure guide and key figures
 ├── scripts/         pipeline, analysis and plotting scripts
-└── results/         result tables, tracked with DVC (*.dvc pointers in git, data on DagsHub)
+└── results/         result tables, outputs of the DVC pipeline (data on DagsHub)
 ```
 
 Reads, alignments, assemblies and the full figure set are not stored in git.

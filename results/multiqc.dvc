@@ -1,6 +1,0 @@
-outs:
-- md5: 39746ebb98fc5a0985e34310da46835b.dir
-  size: 18583089
-  nfiles: 81
-  hash: md5
-  path: multiqc

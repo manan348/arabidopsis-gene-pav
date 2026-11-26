@@ -6,7 +6,7 @@ Run:
 
 Inputs (read only): data/reference/TAIR10.1_Col-0/GCF_000001735.4/genomic.gff (RefSeq product names),
     data/reference/genes.bed, results/pav/pav_long.tsv.gz
-Outputs: results/figures/37_function_nlr_genes__chromosome_ideogram_fisher_test.png (300 dpi), results/pav/nlr_genes.tsv
+Outputs: results/figures/37_function_nlr_genes__chromosome_ideogram_fisher_test.png (300 dpi), results/analysis/nlr_genes.tsv
 
 NLR = protein-coding gene whose RefSeq CDS product name contains NB-ARC or NBS (TIR-NBS-LRR, CC-NBS-LRR,
 TIR-NBS, NB-ARC ...). A name-based list, so it is an approximation of the full NLR set.
@@ -55,7 +55,7 @@ def main():
     ap.add_argument("--gff", default="data/reference/TAIR10.1_Col-0/GCF_000001735.4/genomic.gff")
     ap.add_argument("--bed", default="data/reference/genes.bed")
     ap.add_argument("--pav", default="results/pav/pav_long.tsv.gz")
-    ap.add_argument("--table", default="results/pav/nlr_genes.tsv")
+    ap.add_argument("--table", default="results/analysis/nlr_genes.tsv")
     ap.add_argument("--out", default="results/figures/37_function_nlr_genes__chromosome_ideogram_fisher_test.png")
     a = ap.parse_args()
 

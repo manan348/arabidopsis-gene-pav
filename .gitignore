@@ -69,3 +69,25 @@ results/assembly_busco_*.log
 .vscode/
 # full figure set (39 PNGs, 17 MB) kept local; 8 key figures are in docs/figures/
 results/figures/
+# daily research log: kept locally, not published
+docs/research_log.md
+# outputs of the DVC pipeline (dvc.yaml): data on DagsHub, only dvc.lock in git
+results/fastp/
+results/qc_raw/
+results/qc_final/
+results/mapping/
+results/multiqc/
+results/pav/
+results/sv/
+results/go/
+results/interactive/
+results/analysis/
+results/variants/filtered.vcf.gz
+results/variants/filtered_gt.tsv.gz
+results/variants/high_impact.tsv.gz
+results/variants/lof_genes.tsv.gz
+results/variants/pi_genes.tsv
+results/variants/pi_windows.tsv
+results/variants/pnps_genes.tsv
+results/assembly/liftoff_vs_pav_genes.tsv.gz
+results/assembly/fig16_depth.tsv
