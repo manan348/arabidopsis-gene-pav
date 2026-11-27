@@ -1,8 +1,0 @@
-data/bam/Col-0/Col-0.markdup.bam
-data/bam/An-1/An-1.markdup.bam
-data/bam/Kyoto/Kyoto.markdup.bam
-data/bam/Kondara/Kondara.markdup.bam
-data/bam/Cvi-0/Cvi-0.markdup.bam
-data/bam/Ler-1/Ler-1.markdup.bam
-data/bam/Se-0/Se-0.markdup.bam
-data/bam/Ale-Stenar-44-4/Ale-Stenar-44-4.markdup.bam
